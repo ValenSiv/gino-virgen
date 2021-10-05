@@ -1,0 +1,236 @@
+<!doctype html>
+<html lang="es">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Menú Hamburguesa</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        header {
+            background: purple;
+            text-align: center;
+            color: white;
+            height: 4em;
+            line-height: 4em;
+        }
+
+        section {
+            padding: 1.1rem;
+        }
+
+        section p {
+            margin: 1rem 0;
+            font-size: 1rem;
+            line-height: 1.4rem;
+        }
+
+        @media screen and (max-width: 991px) {
+
+            nav {
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+            }
+
+            #hamburguesa li {
+                list-style: none;
+                text-indent: -100px;
+                overflow: hidden;
+                margin-top: .75em;
+                width: 2.5em;
+            }
+
+            #hamburguesa li a {
+                background: url("imagenes/menu.png") no-repeat center center;
+                background-size: cover;
+                display: block;
+                height: 2.5em;
+            }
+
+            #hamburguesa li:last-child {
+                display: none;
+            }
+
+            /* En este ejemplo cambiamos el efecto de apertura, en vez de manejar el left cambiamos el alto de la caja, cuando está cerrada la barra su alto será cero y cuando está abierta el mismo alto que tenía en el ejemplo anterior. 
+            
+            Lo único que tenemos que tener en cuentra es que si la ul tiene alto cero los botones se verán igual excediendo el alto de la caja, por lo que los ocultamos con la propiedad overflow. */
+
+            nav:target #barra {
+                height: calc(100vh - 4em);
+            }
+
+            nav:target #hamburguesa li:first-child {
+                display: none;
+            }
+
+            nav:target #hamburguesa li:last-child {
+                display: block;
+            }
+
+            /* Como le sacamos el padding a la barra de 1rem para que no se aplique cuando tienen alto cero, recuperamos ese valor de distancia del borde superior en el primer li y luego en pc se lo agregamos nuevamente a la barra. */
+
+            #barra li:first-child {
+                margin-top: 2rem;
+            }
+        }
+
+        #barra {
+            width: 100%;
+            height: 0;
+            overflow: hidden;
+            position: absolute;
+            top: 4em;
+            left: 0;
+            background: #F36;
+            transition: height .5s ease;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        #barra li {
+            list-style: none;
+            margin: 1em;
+            width: 80%;
+        }
+
+        #barra li a {
+            text-decoration: none;
+            display: block;
+            background: #F9F;
+            color: black;
+            text-align: center;
+            line-height: 2em;
+        }
+
+        /* Estilos para pc. */
+
+        @media screen and (min-width: 992px) {
+
+            #hamburguesa {
+                display: none;
+            }
+
+            header {
+                height: auto;
+                max-width: 1100px;
+                margin: auto;
+                display: flex;
+            }            
+
+            h1 {
+                padding-left: 1.5rem;
+            }
+
+            #menu {
+                flex: 1;
+            }
+
+            #barra {
+                position: static;
+                height: auto;
+                background: none;
+                flex-direction: row;
+                justify-content: flex-end;
+                padding: 1rem;
+            }
+
+            #barra li {
+                width: 130px;
+                margin: 0 1em;
+            }
+            
+            section {
+                max-width: 1100px;
+                margin: auto;
+                display: flex;
+                flex-wrap: wrap;
+            }
+
+            section h2 {
+                flex: 1 992px;
+            }
+
+            section p {
+                flex: 1 450px;
+                padding-top: 1rem;
+                margin: 0;
+            }
+
+            section p:last-child {
+                flex: 0 50%;
+            }
+
+            section p:nth-child(even){
+                padding-right: 0.5rem;
+            }
+
+            section p:nth-child(odd){
+                padding-left: 0.5rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <h1>Menú responsive</h1>
+
+        <!-- En el nav incluímos una doble barra de navegación: una que contiene los botones para abrir y cerrar el menú (id hamburguesa) y otra con la barra de navegación del sitio (id barra). 
+            
+        También al nav le damos un id (menu) para trabajar la pseudoclase target. La idea es que HAMBURGUESA sea visible en mobile y BARRA no, y en pc tendremos la situación opuesta: HAMBURGUESA oculta y BARRA visible siempre. 
+        
+        En mobile cuando MENU entre en target vamos a ocultar el botón que abre el menú y mostrar el que lo cierra (de la ul hamburguesa) y al mismo tiempo vamos a mostrar la ul BARRA. 
+        
+        Cuando hacemos click en algún botón de BARRA o en cerrar de HAMBURGUESA, el nav MENU deja de estar en target y, por consiguiente, vuelve a su estado de reposo (el botón abrir de la ul hamburguesa visible y el de cerrar y la ul barra oculta). -->
+
+        <nav id="menu">
+            <ul id="hamburguesa">
+                <li><a href="#menu">Abrir</a></li>
+                <li><a href="#">Cerrar</a></li>
+            </ul>
+            <ul id="barra">
+                <li><a href="#uno">Botón UNO</a></li>
+                <li><a href="#dos">Botón DOS</a></li>
+                <li><a href="#tres">Botón TRES</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section id="uno">
+        <h2>Título de la sección UNO</h2>
+        <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Odit distinctio laudantium recusandae iusto quo, accusantium ea atque qui quod! Aliquam suscipit debitis sint quia qui animi vel doloremque architecto modi.</p>
+        <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Odit distinctio laudantium recusandae iusto quo, accusantium ea atque qui quod! Aliquam suscipit debitis sint quia qui animi vel doloremque architecto modi.</p>
+        <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Odit distinctio laudantium recusandae iusto quo, accusantium ea atque qui quod! Aliquam suscipit debitis sint quia qui animi vel doloremque architecto modi.</p>
+        <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Odit distinctio laudantium recusandae iusto quo, accusantium ea atque qui quod! Aliquam suscipit debitis sint quia qui animi vel doloremque architecto modi.</p>
+        <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Odit distinctio laudantium recusandae iusto quo, accusantium ea atque qui quod! Aliquam suscipit debitis sint quia qui animi vel doloremque architecto modi.</p>
+    </section>
+
+    <section id="dos">
+        <h2>Título de la sección DOS</h2>
+        <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Odit distinctio laudantium recusandae iusto quo, accusantium ea atque qui quod! Aliquam suscipit debitis sint quia qui animi vel doloremque architecto modi.</p>
+        <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Odit distinctio laudantium recusandae iusto quo, accusantium ea atque qui quod! Aliquam suscipit debitis sint quia qui animi vel doloremque architecto modi.</p>
+        <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Odit distinctio laudantium recusandae iusto quo, accusantium ea atque qui quod! Aliquam suscipit debitis sint quia qui animi vel doloremque architecto modi.</p>
+        <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Odit distinctio laudantium recusandae iusto quo, accusantium ea atque qui quod! Aliquam suscipit debitis sint quia qui animi vel doloremque architecto modi.</p>
+        <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Odit distinctio laudantium recusandae iusto quo, accusantium ea atque qui quod! Aliquam suscipit debitis sint quia qui animi vel doloremque architecto modi.</p>
+    </section>
+
+    <section id="tres">
+        <h2>Título de la sección TRES</h2>
+        <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Odit distinctio laudantium recusandae iusto quo, accusantium ea atque qui quod! Aliquam suscipit debitis sint quia qui animi vel doloremque architecto modi.</p>
+        <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Odit distinctio laudantium recusandae iusto quo, accusantium ea atque qui quod! Aliquam suscipit debitis sint quia qui animi vel doloremque architecto modi.</p>
+        <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Odit distinctio laudantium recusandae iusto quo, accusantium ea atque qui quod! Aliquam suscipit debitis sint quia qui animi vel doloremque architecto modi.</p>
+        <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Odit distinctio laudantium recusandae iusto quo, accusantium ea atque qui quod! Aliquam suscipit debitis sint quia qui animi vel doloremque architecto modi.</p>
+        <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Odit distinctio laudantium recusandae iusto quo, accusantium ea atque qui quod! Aliquam suscipit debitis sint quia qui animi vel doloremque architecto modi.</p>
+    </section>
+</body>
+
+</html>
